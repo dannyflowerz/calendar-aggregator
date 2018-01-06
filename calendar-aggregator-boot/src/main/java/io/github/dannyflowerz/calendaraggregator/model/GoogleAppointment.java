@@ -1,6 +1,5 @@
 package io.github.dannyflowerz.calendaraggregator.model;
 
-import java.time.ZonedDateTime;
 import java.util.Date;
 
 import lombok.Getter;
