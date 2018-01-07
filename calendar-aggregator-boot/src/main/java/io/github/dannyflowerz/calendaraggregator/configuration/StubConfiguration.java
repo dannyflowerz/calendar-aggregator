@@ -4,7 +4,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 import org.springframework.context.annotation.Bean;
@@ -24,11 +24,11 @@ public class StubConfiguration {
         void start() {
             wireMockServer.start();
             configureFor(9081);
-            stubFor(get(urlEqualTo("/google/appointments"))
+            stubFor(get(urlMatching("/google/appointments.*")).atPriority(99)
                     .willReturn(aResponse()
                             .withHeader("Content-Type", "application/json")
                             .withBody("[]")));
-            stubFor(get(urlEqualTo("/outlook/appointments"))
+            stubFor(get(urlMatching("/outlook/appointments.*")).atPriority(99)
                     .willReturn(aResponse()
                             .withHeader("Content-Type", "application/json")
                             .withBody("[]")));

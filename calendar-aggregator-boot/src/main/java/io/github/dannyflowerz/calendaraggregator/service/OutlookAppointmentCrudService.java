@@ -1,5 +1,6 @@
 package io.github.dannyflowerz.calendaraggregator.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,8 +20,9 @@ class OutlookAppointmentCrudService implements AppointmentCrudService {
     private OutlookProperties outlookProperties;
 
     @Override
-    public List<Appointment> getAppointments() {
-        List<OutlookAppointment> outlookAppointments = new RestTemplate().getForObject(outlookProperties.getBaseUrl() + outlookProperties.getGetAppointmentsEndPoint(), List.class);
+    public List<Appointment> getAppointments(LocalDate startDate, LocalDate endDate) {
+    	String url = outlookProperties.getBaseUrl() + outlookProperties.getGetAppointmentsEndPoint() + "?startDate="  + startDate + "&endDate="  + endDate;
+    	List<OutlookAppointment> outlookAppointments = new RestTemplate().getForObject(url, List.class);
         return outlookAppointments.stream()
                 .map(AppointmentTranslatorUtil::translate)
                 .collect(Collectors.toList());
