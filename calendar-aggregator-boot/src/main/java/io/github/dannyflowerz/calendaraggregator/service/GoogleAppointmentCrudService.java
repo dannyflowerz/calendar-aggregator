@@ -3,6 +3,7 @@ package io.github.dannyflowerz.calendaraggregator.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ class GoogleAppointmentCrudService implements AppointmentCrudService {
     @Override
     public List<Appointment> getAppointments(LocalDate startDate, LocalDate endDate) {
         String url = googleProperties.getBaseUrl() + googleProperties.getGetAppointmentsEndPoint() + "?startDate="  + startDate + "&endDate="  + endDate;
-    	List<GoogleAppointment> googleAppointments = new RestTemplate().getForObject(url, List.class);
-        return googleAppointments.stream()
+    	GoogleAppointment[] googleAppointments = new RestTemplate().getForObject(url, GoogleAppointment[].class);
+        return Stream.of(googleAppointments)
                 .map(AppointmentTranslatorUtil::translate)
                 .collect(Collectors.toList());
     }

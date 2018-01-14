@@ -15,18 +15,25 @@
 
     <dependencies>
         <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>calendar-aggregator-boot</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock</artifactId>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java8</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
         </dependency>
     </dependencies>
 
@@ -83,9 +90,13 @@
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
+                        <configuration>
+                            <skipTests>${skip.functional.tests}</skipTests>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
+            <!-- TODO use different plugin just to run a jar file probably -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -96,6 +107,12 @@
                         <goals>
                             <goal>start</goal>
                         </goals>
+                        <configuration>
+                            <profiles>
+                                <profile>stubbed</profile>
+                            </profiles>
+                            <skip>${skip.server.start}</skip>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>post-integration-test</id>

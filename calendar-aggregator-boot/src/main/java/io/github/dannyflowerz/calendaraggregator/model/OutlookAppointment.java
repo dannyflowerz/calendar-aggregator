@@ -2,9 +2,11 @@ package io.github.dannyflowerz.calendaraggregator.model;
 
 import java.util.Date;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class OutlookAppointment {
 
     private Long id;

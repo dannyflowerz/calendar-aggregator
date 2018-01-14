@@ -3,6 +3,7 @@ package io.github.dannyflowerz.calendaraggregator.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ class OutlookAppointmentCrudService implements AppointmentCrudService {
     @Override
     public List<Appointment> getAppointments(LocalDate startDate, LocalDate endDate) {
     	String url = outlookProperties.getBaseUrl() + outlookProperties.getGetAppointmentsEndPoint() + "?startDate="  + startDate + "&endDate="  + endDate;
-    	List<OutlookAppointment> outlookAppointments = new RestTemplate().getForObject(url, List.class);
-        return outlookAppointments.stream()
+    	OutlookAppointment[] outlookAppointments = new RestTemplate().getForObject(url, OutlookAppointment[].class);
+        return Stream.of(outlookAppointments)
                 .map(AppointmentTranslatorUtil::translate)
                 .collect(Collectors.toList());
     }
