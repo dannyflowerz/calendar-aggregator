@@ -10,14 +10,20 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>io.github.dannyflowerz</groupId>
     <artifactId>calendar-aggregator-test</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>${parent.groupId}</groupId>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>calendar-aggregator-boot</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>calendar-aggregator-boot</artifactId>
+            <version>${project.parent.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
@@ -39,47 +45,6 @@
 
     <build>
         <plugins>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<excludes>-->
-                        <!--<exclude>**/*</exclude>-->
-                    <!--</excludes>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-failsafe-plugin</artifactId>-->
-                <!--<version>2.19.1</version>-->
-                <!--<dependencies>-->
-                    <!--<dependency>-->
-                        <!--<groupId>org.apache.maven.surefire</groupId>-->
-                        <!--<artifactId>surefire-junit47</artifactId>-->
-                        <!--<version>2.16</version>-->
-                    <!--</dependency>-->
-                <!--</dependencies>-->
-                <!--<configuration>-->
-                    <!--<forkCount>5</forkCount>-->
-                    <!--<reuseForks>true</reuseForks>-->
-                    <!--<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>-->
-                    <!--<systemPropertyVariables>-->
-                        <!--<databaseSchema>MY_TEST_SCHEMA_${surefire.forkNumber}</databaseSchema>-->
-                    <!--</systemPropertyVariables>-->
-                    <!--<includes>-->
-                        <!--<include>**/*</include>-->
-                    <!--</includes>-->
-                    <!--<skipTests>${skip.functional.tests}</skipTests>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>integration-test</goal>-->
-                            <!--<goal>verify</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -96,7 +61,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- TODO use different plugin just to run a jar file probably -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -119,6 +83,9 @@
                         <goals>
                             <goal>stop</goal>
                         </goals>
+                        <configuration>
+                            <fork>true</fork>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

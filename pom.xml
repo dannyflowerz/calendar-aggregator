@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.github.dannyflowerz</groupId>
@@ -26,6 +26,7 @@
 		<wiremock.version>2.12.0</wiremock.version>
 		<cucumber.version>2.3.1</cucumber.version>
 		<restassured.version>3.0.3</restassured.version>
+		<start-class>io.github.dannyflowerz.calendaraggregator.CalendarAggregatorApplication</start-class>
 	</properties>
 
 	<modules>
@@ -40,19 +41,21 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
+				<activatedProperties>default</activatedProperties>
 				<skip.server.start>true</skip.server.start>
 				<skip.functional.tests>true</skip.functional.tests>
 			</properties>
 		</profile>
 		<profile>
 			<id>ft</id>
-			<!--<activation>-->
-				<!--<property>-->
-					<!--<name>ft</name>-->
-					<!--<value>true</value>-->
-				<!--</property>-->
-			<!--</activation>-->
+			<activation>
+				<property>
+					<name>ft</name>
+					<value>true</value>
+				</property>
+			</activation>
 			<properties>
+				<activatedProperties>ft</activatedProperties>
 				<skip.server.start>false</skip.server.start>
 				<skip.functional.tests>false</skip.functional.tests>
 			</properties>
@@ -93,16 +96,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-
-
-	<!--<dependencyManagement>-->
-		<!--<dependencies>-->
-
-		<!--</dependencies>-->
-	<!--</dependencyManagement>-->
-
-
-
-
 </project>
