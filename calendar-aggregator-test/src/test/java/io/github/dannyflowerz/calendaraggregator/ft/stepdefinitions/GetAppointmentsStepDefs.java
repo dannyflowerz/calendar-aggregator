@@ -1,6 +1,5 @@
 package io.github.dannyflowerz.calendaraggregator.ft.stepdefinitions;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
 import cucumber.api.java8.En;
 import gherkin.deps.com.google.gson.Gson;
 import gherkin.deps.com.google.gson.GsonBuilder;
@@ -9,11 +8,7 @@ import io.github.dannyflowerz.calendaraggregator.model.GoogleAppointment;
 import io.github.dannyflowerz.calendaraggregator.model.OutlookAppointment;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -56,7 +51,7 @@ public class GetAppointmentsStepDefs implements En {
         });
     }
 
-    private void happyStubs() throws IOException {
+    private void happyStubs() {
         List<GoogleAppointment> googleAppointments = Arrays.asList(
                 GoogleAppointment.builder().id(UUID.randomUUID().toString()).title("Google 1").start(new Date()).end(new Date()).visibility("PRIVATE").build(),
                 GoogleAppointment.builder().id(UUID.randomUUID().toString()).title("Google 2").start(new Date()).end(new Date()).visibility("PUBLIC").build()

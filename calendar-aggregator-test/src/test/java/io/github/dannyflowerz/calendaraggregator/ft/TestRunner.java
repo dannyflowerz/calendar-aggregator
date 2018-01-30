@@ -10,6 +10,4 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/scenarios",
         tags = {"@happy"}
 )
-public class TestRunner {
-    //Run this
-}
+public class TestRunner { }
