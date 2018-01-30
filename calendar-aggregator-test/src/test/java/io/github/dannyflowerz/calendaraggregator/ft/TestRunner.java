@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty", "html:target/test-reports/html"},
-        glue = "io/github/dannyflowerz/calendaraggregator/ft",
         features = "src/test/resources/scenarios",
         tags = {"@happy"}
 )

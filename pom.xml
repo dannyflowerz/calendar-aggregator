@@ -41,21 +41,13 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<activatedProperties>default</activatedProperties>
 				<skip.server.start>true</skip.server.start>
 				<skip.functional.tests>true</skip.functional.tests>
 			</properties>
 		</profile>
 		<profile>
 			<id>ft</id>
-			<activation>
-				<property>
-					<name>ft</name>
-					<value>true</value>
-				</property>
-			</activation>
 			<properties>
-				<activatedProperties>ft</activatedProperties>
 				<skip.server.start>false</skip.server.start>
 				<skip.functional.tests>false</skip.functional.tests>
 			</properties>

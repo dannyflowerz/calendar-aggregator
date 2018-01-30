@@ -28,13 +28,10 @@ public class GetAppointmentsStepDefs implements En {
     private String startDate;
     private String endDate;
     private Response response;
-    private WireMockServer wireMockServer = new WireMockServer();
-    private CloseableHttpClient httpClient = HttpClients.createDefault();
 
     public GetAppointmentsStepDefs() {
         Before(() -> {
-            wireMockServer.start();
-            configureFor("localhost", 8080);
+            configureFor("localhost", 9081);
             happyStubs();
         });
 
@@ -48,19 +45,14 @@ public class GetAppointmentsStepDefs implements En {
             response = RestAssured.get(url);
         });
 
-        Then("the (Google|Outlook) server receives a valid GET request for appointments", (provider) -> {
-            verify(exactly(1), getRequestedFor(urlMatching("/google/appointments.*")));
-            verify(exactly(1), getRequestedFor(urlMatching("/outlook/appointments.*")));
+        Then("the (google|outlook) server receives a valid GET request for appointments", (provider) -> {
+            verify(exactly(1), getRequestedFor(urlEqualTo("/"+provider+"/appointments?startDate=" + startDate + "&endDate=" + endDate)));
         });
 
         Then("I receive a (\\d{3}) response with (\\d+) appointments", (Integer status, Integer count) -> {
             assertEquals(status.intValue(), response.getStatusCode());
             List<Appointment> appointments = GSON.fromJson(response.getBody().print(), List.class);
             assertEquals(count.intValue(), appointments.size());
-        });
-
-        After(() -> {
-            wireMockServer.stop();
         });
     }
 
@@ -82,18 +74,12 @@ public class GetAppointmentsStepDefs implements En {
                         .withHeader("Content-Type", "application/json")
                         .withBody(GSON.toJson(googleAppointments))));
 
-        HttpGet request = new HttpGet("http://localhost:8080/google/appointments?startDate=2017-01-08&endDate=2017-01-12");
-        httpClient.execute(request);
-
-        givenThat(get(urlMatching("/outlook/appointments.*"))
+        stubFor(get(urlMatching("/outlook/appointments.*"))
                 .withQueryParam("startDate", equalTo("2017-01-08"))
                 .withQueryParam("endDate", equalTo("2017-01-12"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(GSON.toJson(outlookAppointments))));
-
-        request = new HttpGet("http://localhost:8080/outlook/appointments?startDate=2017-01-08&endDate=2017-01-12");
-        httpClient.execute(request);
     }
 }
