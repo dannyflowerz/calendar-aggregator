@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<name>calendar-aggregator</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo project for automated functional testing presentation</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

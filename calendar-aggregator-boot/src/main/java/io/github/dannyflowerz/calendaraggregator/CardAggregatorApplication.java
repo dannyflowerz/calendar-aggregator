@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CalendarAggregatorApplication {
+public class CardAggregatorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CalendarAggregatorApplication.class, args);
+		SpringApplication.run(CardAggregatorApplication.class, args);
 	}
 
 }
