@@ -22,7 +22,7 @@ public class CardController {
     @Autowired
     CardCrudService creditCardCrudService;
 
-    @GetMapping("/cards")
+    @GetMapping("/card")
     public CardResponse getCards(@RequestHeader(name = Constants.CUSTOMER_ID_HEADER) String customerId) {
         Optional<List<CardResponse.Card>> debitCardsOpt = debitCardCrudService.getCards(customerId);
         if (!debitCardsOpt.isPresent()) {
