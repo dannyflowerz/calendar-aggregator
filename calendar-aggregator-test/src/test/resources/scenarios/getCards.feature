@@ -1,4 +1,4 @@
-Feature: Get cards for the given customer
+Feature: Get both debit and credit cards for the given customer
 
   @happy
   Scenario: 01 Customer with no debit or credit cards
