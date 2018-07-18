@@ -6,11 +6,11 @@ Feature: Get cards for the given customer
     And this customer has 0 debit cards
     And this customer has 0 credit cards
 	When I get the cards of this customer from our API
-	Then the gDebitCards API receives a GET request on the resource "debit-cards" for this customer
-	And the gCreditCards API receives a GET request on the resource "credit-cards" for this customer
-	And I receive a response with status 200
+	Then I receive a response with status 200
     And the response contains 0 cards
     And the response contains the error message ""
+    And the gDebitCards API received a GET request on the resource "debit-cards" for this customer
+    And the gCreditCards API received a GET request on the resource "credit-cards" for this customer
 
   @happy
   Scenario: 02 Customer with 2 debit and 2 credit cards
@@ -18,11 +18,11 @@ Feature: Get cards for the given customer
     And this customer has 2 debit cards
     And this customer has 2 credit cards
     When I get the cards of this customer from our API
-	Then the gDebitCards API receives a GET request on the resource "debit-cards" for this customer
-	And the gCreditCards API receives a GET request on the resource "credit-cards" for this customer
-    And I receive a response with status 200
+    Then I receive a response with status 200
     And the response contains 4 cards
     And the response contains the error message ""
+    And the gDebitCards API received a GET request on the resource "debit-cards" for this customer
+    And the gCreditCards API received a GET request on the resource "credit-cards" for this customer
 
   @unhappy
   Scenario: 03 Customer with 2 debit cards, but gCreditCardsApi returns an error
@@ -30,11 +30,11 @@ Feature: Get cards for the given customer
     And this customer has 2 debit cards
     And the gCreditCards API responds with status 500 for a GET request on the resource "credit-cards" for this customer
     When I get the cards of this customer from our API
-    Then the gDebitCards API receives a GET request on the resource "debit-cards" for this customer
-    And the gCreditCards API receives a GET request on the resource "credit-cards" for this customer
-    And I receive a response with status 200
+    Then I receive a response with status 200
     And the response contains 2 cards
     And the response contains the error message "We were not able to retrieve your credit cards at this time"
+    And the gDebitCards API received a GET request on the resource "debit-cards" for this customer
+    And the gCreditCards API received a GET request on the resource "credit-cards" for this customer
 
   @unhappy
   Scenario: 04 Customer with 2 credjt cards, but gDebitCardsApi returns an error
@@ -42,10 +42,10 @@ Feature: Get cards for the given customer
     And this customer has 2 credit cards
     And the gDebitCards API responds with status 500 for a GET request on the resource "debit-cards" for this customer
     When I get the cards of this customer from our API
-    Then the gDebitCards API receives a GET request on the resource "debit-cards" for this customer
-    And I receive a response with status 200
+    Then I receive a response with status 200
     And the response contains 0 cards
     And the response contains the error message "We were not able to retrieve your cards at this time"
+    And the gDebitCards API received a GET request on the resource "debit-cards" for this customer
 
   @unhappy
   Scenario: 05 Both gDebitCardsApi and gCreditCardsApi return an error
@@ -53,10 +53,10 @@ Feature: Get cards for the given customer
     And the gDebitCards API responds with status 500 for a GET request on the resource "debit-cards" for this customer
     And the gCreditCards API responds with status 500 for a GET request on the resource "credit-cards" for this customer
     When I get the cards of this customer from our API
-    Then the gDebitCards API receives a GET request on the resource "debit-cards" for this customer
-    And I receive a response with status 200
+    Then I receive a response with status 200
     And the response contains 0 cards
     And the response contains the error message "We were not able to retrieve your cards at this time"
+    And the gDebitCards API received a GET request on the resource "debit-cards" for this customer
 
   @performance
   Scenario: 06 100 requests in a second
