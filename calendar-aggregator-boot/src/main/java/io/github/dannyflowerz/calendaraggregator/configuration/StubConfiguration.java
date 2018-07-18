@@ -19,11 +19,11 @@ public class StubConfiguration {
         void start() {
             wireMockServer.start();
             configureFor(9081);
-            stubFor(get(urlMatching("/api/gDebitCards/cards")).atPriority(99)
+            stubFor(get(urlMatching("/api/gDebitCards/debit-cards")).atPriority(99)
                     .willReturn(aResponse()
                             .withHeader("Content-Type", "application/json")
                             .withBody("[]")));
-            stubFor(get(urlMatching("/api/gCreditCards/cards")).atPriority(99)
+            stubFor(get(urlMatching("/api/gCreditCards/credit-cards")).atPriority(99)
                     .willReturn(aResponse()
                             .withHeader("Content-Type", "application/json")
                             .withBody("[]")));
