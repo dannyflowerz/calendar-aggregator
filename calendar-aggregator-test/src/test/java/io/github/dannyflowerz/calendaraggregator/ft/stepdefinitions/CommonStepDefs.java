@@ -1,6 +1,13 @@
 package io.github.dannyflowerz.calendaraggregator.ft.stepdefinitions;
 
 import cucumber.api.java8.En;
+import io.github.dannyflowerz.calendaraggregator.domain.Constants;
+import io.github.dannyflowerz.calendaraggregator.model.CardResponse;
+import io.restassured.response.Response;
+import org.springframework.http.HttpMethod;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommonStepDefs implements En {
 
@@ -14,10 +21,10 @@ public class CommonStepDefs implements En {
 //
 //        Given("^the customer \"([^\"]*)\"$", (String customerId) -> this.customerId = customerId);
 //
-//        Given("^the (gDebitCards|gCreditCards) API responds with status (\\d{3}) for a (GET|POST|PUT|DELETE) request on the resource \"([^\"]*)\" for this customer$",
+//        Given("^the (gDebitCards|gCreditCards) API responds with status (\\d{3}) for a (GET|POST|PUT|DELETE) request on the \"([^\"]*)\" resource for this customer$",
 //                (String backEnd, Integer status, HttpMethod method, String resource) -> StubGenerator.genericStub(method, backEnd, resource, customerId, status, null));
 //
-//        Then("^the (gDebitCards|gCreditCards) API received a (GET|POST|PUT|DELETE) request on the resource \"([^\"]*)\" for this customer$",
+//        Then("^the (gDebitCards|gCreditCards) API received a (GET|POST|PUT|DELETE) request on the \"([^\"]*)\" resource for this customer$",
 //                (String backEnd, HttpMethod method, String resource) -> {
 //                    switch (method) {
 //                        case GET:

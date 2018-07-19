@@ -1,6 +1,11 @@
 package io.github.dannyflowerz.calendaraggregator.ft.stepdefinitions;
 
 import cucumber.api.java8.En;
+import io.github.dannyflowerz.calendaraggregator.domain.Constants;
+import io.github.dannyflowerz.calendaraggregator.model.CardResponse;
+
+import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
 
 public class GetCardsStepDefs implements En {
 
